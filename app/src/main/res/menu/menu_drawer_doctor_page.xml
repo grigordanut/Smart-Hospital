@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/doctor_addPatients"
+            android:icon="@drawable/ic_launcher_foreground"
+            android:title="@string/mDDoctor_addPatient" />
+
+        <item
+            android:id="@+id/doctorShow_patientsList"
+            android:icon="@drawable/ic_launcher_foreground"
+            android:title="@string/mDDoctor_showPatientList" />
+
+        <item
+            android:id="@+id/doctor_addMedicalRecords"
+            android:icon="@drawable/ic_launcher_foreground"
+            android:title="@string/mDDoctor_addMedicalRecords" />
+
+        <item
+            android:id="@+id/doctorShow_recordsList"
+            android:icon="@drawable/ic_launcher_foreground"
+            android:title="@string/mDDoctor_showMedicalRecords" />
+
+    </group>
+
+</menu>

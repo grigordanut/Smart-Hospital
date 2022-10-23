@@ -1,0 +1,11 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.smarthospitals.MainActivity">
+
+    <item
+        android:id="@+id/contactUs"
+        android:orderInCategory="200"
+        app:showAsAction="ifRoom"
+        android:title="@string/menuMain_logOut"/>
+</menu>

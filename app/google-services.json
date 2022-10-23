@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1029040325617",
+    "project_id": "smart-doctor-1514f",
+    "storage_bucket": "smart-doctor-1514f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1029040325617:android:64cb71ada70e8958cfba50",
+        "android_client_info": {
+          "package_name": "com.example.smarthospitals"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1029040325617-pr4dghtgg9rifojjtbu1p2bvosmp7u5v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBcUzEKrfR19MQRQ7o7HNOsv7vEC24ypx0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1029040325617-pr4dghtgg9rifojjtbu1p2bvosmp7u5v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

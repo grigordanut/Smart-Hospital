@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/hospital_addDoctors"
+            android:icon="@drawable/ic_launcher_foreground"
+            android:title="@string/mDHosp_addDoctors" />
+
+        <item
+            android:id="@+id/hospitalShow_doctorsList"
+            android:icon="@drawable/ic_launcher_foreground"
+            android:title="@string/mDHosp_showDoctorsList" />
+
+        <item
+            android:id="@+id/hospShow_patientList"
+            android:icon="@drawable/ic_launcher_foreground"
+            android:title="@string/mDHosp_showPatients" />
+
+    </group>
+
+</menu>

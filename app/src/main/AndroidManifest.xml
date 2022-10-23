@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.smarthospitals">
+
+    <uses-permission android:name="android.permission.NFC" />
+
+    <uses-feature android:name="android.hardware.nfc" />
+
+    <uses-permission android:name="android.permission.USE_FINGERPRINT" />
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.SmartHospitals">
+        <activity
+            android:name=".NFCReadCard"
+            android:exported="false" />
+        <activity
+            android:name=".PatientNFC"
+            android:exported="false" />
+        <activity
+            android:name=".HospitalChangeEmail"
+            android:exported="false" />
+        <activity
+            android:name=".UpdateMedicalRecord"
+            android:exported="false" />
+        <activity
+            android:name=".PatientListShowMedicalRecord"
+            android:exported="false" />
+        <activity
+            android:name=".MedicalRecordList"
+            android:exported="false" />
+        <activity
+            android:name=".AddMedicalRecord"
+            android:exported="false" />
+        <activity
+            android:name=".PatientListAddMedicalRecord"
+            android:exported="false" />
+        <activity
+            android:name=".PatientListDoctor"
+            android:exported="false" />
+        <activity
+            android:name=".PatientChangeEmail"
+            android:exported="false" />
+        <activity
+            android:name=".PatientEditProfile"
+            android:exported="false" />
+        <activity
+            android:name=".DoctorChangeEmail"
+            android:exported="false" />
+        <activity
+            android:name=".MedicalRecordPatient"
+            android:exported="false" />
+        <activity
+            android:name=".PatientChangePassword"
+            android:exported="false" />
+        <activity
+            android:name=".PatientPage"
+            android:exported="false" />
+        <activity
+            android:name=".PatientRegistration"
+            android:exported="false" />
+        <activity
+            android:name=".DoctorChangePassword"
+            android:exported="false" />
+        <activity
+            android:name=".DoctorEditProfile"
+            android:exported="false" />
+        <activity
+            android:name=".PatientListHospital"
+            android:exported="false" />
+        <activity
+            android:name=".DoctorListHospital"
+            android:exported="false" />
+        <activity
+            android:name=".DoctorRegistration"
+            android:exported="false" />
+        <activity
+            android:name=".HospitalChangePassword"
+            android:exported="false" />
+        <activity
+            android:name=".HospitalEditProfile"
+            android:exported="false" />
+        <activity
+            android:name=".ResetPassword"
+            android:exported="false" />
+        <activity
+            android:name=".HospitalPage"
+            android:exported="false" />
+        <activity
+            android:name=".DoctorPage"
+            android:exported="false" />
+        <activity
+            android:name=".FingerPrintScan"
+            android:exported="false" />
+        <activity
+            android:name=".Login"
+            android:exported="false" />
+        <activity
+            android:name=".HospitalRegistration"
+            android:exported="false" />
+        <activity
+            android:name=".HospitalListAddDoctor"
+            android:exported="false" />
+        <activity
+            android:name=".CheckUniqueCode"
+            android:exported="false" />
+        <activity
+            android:name=".LoginBy"
+            android:exported="false" />
+        <activity
+            android:name=".ContactUsForm"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

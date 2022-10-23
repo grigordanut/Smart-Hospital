@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.danut.smarthospitals.PatientPage">
+
+    <item
+        android:id="@+id/patient_logOut"
+        android:orderInCategory="100"
+        android:title="@string/menuPat_logOut"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/patient_editProfile"
+        android:orderInCategory="100"
+        android:title="@string/menuPat_editProfile"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/patient_changeEmail"
+        android:orderInCategory="100"
+        android:title="@string/menuPat_changeEmail"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/patient_changePassword"
+        android:orderInCategory="100"
+        android:title="@string/menuPat_changePassword"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/patient_deleteAccount"
+        android:orderInCategory="100"
+        android:title="@string/menuPat_deleteAccount"
+        app:showAsAction="never"/>
+</menu>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/doctor_logOut"
+        android:orderInCategory="100"
+        android:title="@string/menuDoctor_logOut"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/doctor_editProfile"
+        android:orderInCategory="100"
+        android:title="@string/menuDoctor_editProfile"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/doctor_changeEmail"
+        android:orderInCategory="100"
+        android:title="@string/menuDoctor_changeEmail"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/doctor_changePassword"
+        android:orderInCategory="200"
+        android:title="@string/menuDoctor_changePassword"
+        app:showAsAction="never"/>
+</menu>
+
+
