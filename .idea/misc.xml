@@ -78,8 +78,56 @@
         <entry key="..\:/Users/danut/AndroidStudioProjects/SmartDoctor/app/src/main/res/menu/menu_patient_page.xml" value="0.25" />
         <entry key="..\:/Users/danut/AndroidStudioProjects/SmartDoctor/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2" />
         <entry key="..\:/Users/danut/AndroidStudioProjects/SmartDoctor/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.18" />
+        <entry key="..\:/Users/danut/AndroidStudioProjects/SmartHospital/app/src/main/res/layout/activity_add_medical_record.xml" value="0.17962962962962964" />
+        <entry key="..\:/Users/danut/AndroidStudioProjects/SmartHospital/app/src/main/res/layout/activity_check_unique_code.xml" value="0.25" />
+        <entry key="..\:/Users/danut/AndroidStudioProjects/SmartHospital/app/src/main/res/layout/activity_contact_us_form.xml" value="0.25" />
+        <entry key="..\:/Users/danut/AndroidStudioProjects/SmartHospital/app/src/main/res/layout/activity_doctor_change_email.xml" value="0.25" />
+        <entry key="..\:/Users/danut/AndroidStudioProjects/SmartHospital/app/src/main/res/layout/activity_doctor_change_password.xml" value="0.25" />
+        <entry key="..\:/Users/danut/AndroidStudioProjects/SmartHospital/app/src/main/res/layout/activity_doctor_edit_profile.xml" value="0.25" />
+        <entry key="..\:/Users/danut/AndroidStudioProjects/SmartHospital/app/src/main/res/layout/activity_doctor_list_hospital.xml" value="0.25" />
+        <entry key="..\:/Users/danut/AndroidStudioProjects/SmartHospital/app/src/main/res/layout/activity_doctor_page.xml" value="0.25" />
+        <entry key="..\:/Users/danut/AndroidStudioProjects/SmartHospital/app/src/main/res/layout/activity_doctor_registration.xml" value="0.25" />
+        <entry key="..\:/Users/danut/AndroidStudioProjects/SmartHospital/app/src/main/res/layout/activity_finger_print_scan.xml" value="0.25" />
+        <entry key="..\:/Users/danut/AndroidStudioProjects/SmartHospital/app/src/main/res/layout/activity_hospital_change_email.xml" value="0.25" />
+        <entry key="..\:/Users/danut/AndroidStudioProjects/SmartHospital/app/src/main/res/layout/activity_hospital_change_password.xml" value="0.25" />
+        <entry key="..\:/Users/danut/AndroidStudioProjects/SmartHospital/app/src/main/res/layout/activity_hospital_edit_profile.xml" value="0.25" />
+        <entry key="..\:/Users/danut/AndroidStudioProjects/SmartHospital/app/src/main/res/layout/activity_hospital_list_add_doctor.xml" value="0.25" />
+        <entry key="..\:/Users/danut/AndroidStudioProjects/SmartHospital/app/src/main/res/layout/activity_hospital_page.xml" value="0.25" />
+        <entry key="..\:/Users/danut/AndroidStudioProjects/SmartHospital/app/src/main/res/layout/activity_hospital_registration.xml" value="0.25" />
+        <entry key="..\:/Users/danut/AndroidStudioProjects/SmartHospital/app/src/main/res/layout/activity_login.xml" value="0.25" />
+        <entry key="..\:/Users/danut/AndroidStudioProjects/SmartHospital/app/src/main/res/layout/activity_login_by.xml" value="0.25" />
+        <entry key="..\:/Users/danut/AndroidStudioProjects/SmartHospital/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/danut/AndroidStudioProjects/SmartHospital/app/src/main/res/layout/activity_medical_record_list.xml" value="0.25" />
+        <entry key="..\:/Users/danut/AndroidStudioProjects/SmartHospital/app/src/main/res/layout/activity_medical_record_patient.xml" value="0.25" />
+        <entry key="..\:/Users/danut/AndroidStudioProjects/SmartHospital/app/src/main/res/layout/activity_nfcread_card.xml" value="0.25" />
+        <entry key="..\:/Users/danut/AndroidStudioProjects/SmartHospital/app/src/main/res/layout/activity_patient_change_email.xml" value="0.25" />
+        <entry key="..\:/Users/danut/AndroidStudioProjects/SmartHospital/app/src/main/res/layout/activity_patient_change_password.xml" value="0.25" />
+        <entry key="..\:/Users/danut/AndroidStudioProjects/SmartHospital/app/src/main/res/layout/activity_patient_edit_profile.xml" value="0.25" />
+        <entry key="..\:/Users/danut/AndroidStudioProjects/SmartHospital/app/src/main/res/layout/activity_patient_list_add_medical_record.xml" value="0.25" />
+        <entry key="..\:/Users/danut/AndroidStudioProjects/SmartHospital/app/src/main/res/layout/activity_patient_list_doctor.xml" value="0.25" />
+        <entry key="..\:/Users/danut/AndroidStudioProjects/SmartHospital/app/src/main/res/layout/activity_patient_list_hospital.xml" value="0.25" />
+        <entry key="..\:/Users/danut/AndroidStudioProjects/SmartHospital/app/src/main/res/layout/activity_patient_list_show_medical_record.xml" value="0.25" />
+        <entry key="..\:/Users/danut/AndroidStudioProjects/SmartHospital/app/src/main/res/layout/activity_patient_nfc.xml" value="0.25" />
+        <entry key="..\:/Users/danut/AndroidStudioProjects/SmartHospital/app/src/main/res/layout/activity_patient_page.xml" value="0.25" />
+        <entry key="..\:/Users/danut/AndroidStudioProjects/SmartHospital/app/src/main/res/layout/activity_patient_registration.xml" value="0.25" />
+        <entry key="..\:/Users/danut/AndroidStudioProjects/SmartHospital/app/src/main/res/layout/activity_reset_password.xml" value="0.25" />
+        <entry key="..\:/Users/danut/AndroidStudioProjects/SmartHospital/app/src/main/res/layout/activity_update_medical_record.xml" value="0.25" />
+        <entry key="..\:/Users/danut/AndroidStudioProjects/SmartHospital/app/src/main/res/layout/date_picker.xml" value="0.25" />
+        <entry key="..\:/Users/danut/AndroidStudioProjects/SmartHospital/app/src/main/res/layout/doctor_page_header.xml" value="0.25" />
+        <entry key="..\:/Users/danut/AndroidStudioProjects/SmartHospital/app/src/main/res/layout/dropdown_item_gender.xml" value="0.25" />
+        <entry key="..\:/Users/danut/AndroidStudioProjects/SmartHospital/app/src/main/res/layout/hospital_page_header.xml" value="0.25" />
+        <entry key="..\:/Users/danut/AndroidStudioProjects/SmartHospital/app/src/main/res/layout/image_doctor.xml" value="0.25" />
+        <entry key="..\:/Users/danut/AndroidStudioProjects/SmartHospital/app/src/main/res/layout/image_hospital.xml" value="0.25" />
+        <entry key="..\:/Users/danut/AndroidStudioProjects/SmartHospital/app/src/main/res/layout/image_medical_record.xml" value="0.25" />
+        <entry key="..\:/Users/danut/AndroidStudioProjects/SmartHospital/app/src/main/res/layout/image_patient.xml" value="0.25" />
+        <entry key="..\:/Users/danut/AndroidStudioProjects/SmartHospital/app/src/main/res/menu/menu_patient_page.xml" value="0.25" />
         <entry key="..\:/Users/danut/AndroidStudioProjects/SmartHospitals/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.154" />
         <entry key="..\:/Users/danut/AndroidStudioProjects/SmartHospitals/app/src/main/res/drawable/ic_launcher_background.xml" value="0.154" />
+        <entry key="..\:/Users/danut/AndroidStudioProjects/SmartHospitals/app/src/main/res/layout/activity_hospital_registration.xml" value="0.25" />
+        <entry key="..\:/Users/danut/AndroidStudioProjects/SmartHospitals/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/danut/AndroidStudioProjects/SmartHospitals/app/src/main/res/menu/menu_doctor_page.xml" value="0.2359375" />
+        <entry key="..\:/Users/danut/AndroidStudioProjects/SmartHospitals/app/src/main/res/menu/menu_drawer_doctor_page.xml" value="0.2359375" />
+        <entry key="..\:/Users/danut/AndroidStudioProjects/SmartHospitals/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.154" />
       </map>
     </option>
   </component>

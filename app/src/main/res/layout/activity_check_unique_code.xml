@@ -5,9 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/backgrandier"
-    tools:context=".CheckUniqueCode"
-    tools:layout_editor_absoluteX="0dp"
-    tools:layout_editor_absoluteY="0dp">
+    tools:context=".CheckUniqueCode">
 
     <LinearLayout
         android:layout_width="match_parent"
