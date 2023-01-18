@@ -141,13 +141,12 @@ public class HospitalChangePassword extends AppCompatActivity {
                                             hospConfNewPassword.requestFocus();
                                         }
                                         else if (!hospConf_NewPassword.equals(hospNew_Password)) {
-                                            Toast.makeText(HospitalChangePassword.this, "Confirm Password does not match Password", Toast.LENGTH_SHORT).show();
                                             hospConfNewPassword.setError("The Password does not match");
                                             hospConfNewPassword.requestFocus();
                                         }
                                         else{
 
-                                            progressDialog.setMessage("The hospital Password is changing!");
+                                            progressDialog.setMessage("The Hospital password is changing!");
                                             progressDialog.show();
 
                                             firebaseUser.updatePassword(hospNew_Password).addOnCompleteListener(new OnCompleteListener<Void>() {

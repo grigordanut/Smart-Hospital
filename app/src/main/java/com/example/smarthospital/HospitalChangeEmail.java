@@ -45,9 +45,9 @@ public class HospitalChangeEmail extends AppCompatActivity {
 
     private TextView tVHospAuthEmail;
 
-    private EditText hospOdlEmail, hospPassword, hospNewEmail;
+    private EditText hospOldEmail, hospPassword, hospNewEmail;
 
-    private String hospOdl_Email, hosp_Password, hospNew_Email;
+    private String hospOld_Email, hosp_Password, hospNew_Email;
 
     private ProgressDialog progressDialog;
 
@@ -64,8 +64,8 @@ public class HospitalChangeEmail extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
 
-        hospOdlEmail = findViewById(R.id.etHospOldEmail);
-        hospOdlEmail.setEnabled(false);
+        hospOldEmail = findViewById(R.id.etHospOldEmail);
+        hospOldEmail.setEnabled(false);
         hospPassword = findViewById(R.id.etHospPassword);
         hospNewEmail = findViewById(R.id.etHospNewEmail);
 
@@ -73,8 +73,8 @@ public class HospitalChangeEmail extends AppCompatActivity {
         tVHospAuthEmail.setText("Your profile is not authenticated yet. Please authenticate your profile first and then change the Email!!");
         tVHospAuthEmail.setTextColor(Color.RED);
 
-        hospOdl_Email = firebaseUser.getEmail();
-        hospOdlEmail.setText(hospOdl_Email);
+        hospOld_Email = firebaseUser.getEmail();
+        hospOldEmail.setText(hospOld_Email);
 
         Button buttonChangeEmail = findViewById(R.id.btnHospChangeEmail);
         buttonChangeEmail.setOnClickListener(new View.OnClickListener() {
@@ -89,7 +89,7 @@ public class HospitalChangeEmail extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                hospOdl_Email =  hospOdlEmail.getText().toString().trim();
+                hospOld_Email =  hospOldEmail.getText().toString().trim();
                 hosp_Password = hospPassword.getText().toString().trim();
 
                 if (TextUtils.isEmpty(hosp_Password)) {
@@ -101,7 +101,7 @@ public class HospitalChangeEmail extends AppCompatActivity {
                     progressDialog.setMessage("The Hospital is authenticating!");
                     progressDialog.show();
 
-                    AuthCredential credential = EmailAuthProvider.getCredential(hospOdl_Email, hosp_Password);
+                    AuthCredential credential = EmailAuthProvider.getCredential(hospOld_Email, hosp_Password);
 
                     firebaseUser.reauthenticate(credential).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
@@ -140,13 +140,12 @@ public class HospitalChangeEmail extends AppCompatActivity {
                                             hospNewEmail.requestFocus();
                                         }
                                         else if (!Patterns.EMAIL_ADDRESS.matcher(hospNew_Email).matches()) {
-                                            Toast.makeText(HospitalChangeEmail.this, "Please enter a valid email address", Toast.LENGTH_SHORT).show();
                                             hospNewEmail.setError("Enter a valid Email Address");
                                             hospNewEmail.requestFocus();
                                         }
                                         else{
 
-                                            progressDialog.setMessage("The hospital Email is changing!");
+                                            progressDialog.setMessage("The Hospital email is changing!");
                                             progressDialog.show();
 
                                             firebaseUser.updateEmail(hospNew_Email).addOnCompleteListener(new OnCompleteListener<Void>() {

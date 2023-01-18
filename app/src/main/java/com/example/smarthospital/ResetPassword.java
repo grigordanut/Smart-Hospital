@@ -57,7 +57,7 @@ public class ResetPassword extends AppCompatActivity {
 
         if (validateResetPassData()) {
 
-            progressDialog.setMessage("The password is reset!!");
+            progressDialog.setMessage("The password is resetting!!");
             progressDialog.show();
 
             firebaseAuth.sendPasswordResetEmail(email_ResetPass).addOnCompleteListener(new OnCompleteListener<Void>() {

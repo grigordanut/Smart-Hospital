@@ -38,8 +38,8 @@ public class Login extends AppCompatActivity {
     private DatabaseReference databaseRefDoc;
     private DatabaseReference databaseRefPat;
 
-    private TextInputEditText emailLogUser, passwordLogUser;
-    private String emailLog_User, passwordLog_User;
+    private TextInputEditText emailLogUser, passLogUser;
+    private String email_LogUser, pass_LogUser;
 
     private ProgressDialog progressDialog;
 
@@ -55,9 +55,15 @@ public class Login extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
 
+        databaseRefHosp = FirebaseDatabase.getInstance().getReference("Hospitals");
+
+        databaseRefDoc = FirebaseDatabase.getInstance().getReference("Doctors");
+
+        databaseRefPat = FirebaseDatabase.getInstance().getReference("Patients");
+
         //Initialize variables
         emailLogUser = findViewById(R.id.etEmailLogUser);
-        passwordLogUser = findViewById(R.id.etPassLogUser);
+        passLogUser = findViewById(R.id.etPassLogUser);
 
         //Action button log in user
         Button buttonRegNewUser = (Button) findViewById(R.id.btnRegNewUser);
@@ -89,7 +95,7 @@ public class Login extends AppCompatActivity {
                     progressDialog.setMessage("Log in user");
                     progressDialog.show();
 
-                    firebaseAuth.signInWithEmailAndPassword(emailLog_User, passwordLog_User).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    firebaseAuth.signInWithEmailAndPassword(email_LogUser, pass_LogUser).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
 
@@ -103,8 +109,8 @@ public class Login extends AppCompatActivity {
                                     emailLogUser.setError("This email is not registered.");
                                     emailLogUser.requestFocus();
                                 } catch (FirebaseAuthInvalidCredentialsException e) {
-                                    passwordLogUser.setError("Invalid Password");
-                                    passwordLogUser.requestFocus();
+                                    passLogUser.setError("Invalid Password");
+                                    passLogUser.requestFocus();
                                 } catch (Exception e) {
                                     Toast.makeText(Login.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                                 }
@@ -123,18 +129,18 @@ public class Login extends AppCompatActivity {
 
         boolean result = false;
 
-        emailLog_User = Objects.requireNonNull(emailLogUser.getText()).toString().trim();
-        passwordLog_User = Objects.requireNonNull(passwordLogUser.getText()).toString().trim();
+        email_LogUser = Objects.requireNonNull(emailLogUser.getText()).toString().trim();
+        pass_LogUser = Objects.requireNonNull(passLogUser.getText()).toString().trim();
 
-        if (emailLog_User.isEmpty()) {
+        if (email_LogUser.isEmpty()) {
             emailLogUser.setError("Enter your Email Address");
             emailLogUser.requestFocus();
-        } else if (!Patterns.EMAIL_ADDRESS.matcher(emailLog_User).matches()) {
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(email_LogUser).matches()) {
             emailLogUser.setError("Enter a valid Email Address");
             emailLogUser.requestFocus();
-        } else if (passwordLog_User.isEmpty()) {
-            passwordLogUser.setError("Enter your Password");
-            passwordLogUser.requestFocus();
+        } else if (pass_LogUser.isEmpty()) {
+            passLogUser.setError("Enter your Password");
+            passLogUser.requestFocus();
         } else {
             result = true;
         }
@@ -164,8 +170,6 @@ public class Login extends AppCompatActivity {
         //Check if the user Hospital try to log in
         final String hosp_emailCheck = Objects.requireNonNull(emailLogUser.getText()).toString().trim();
 
-        databaseRefHosp = FirebaseDatabase.getInstance().getReference("Hospitals");
-
         databaseRefHosp.orderByChild("hosp_Email").equalTo(hosp_emailCheck)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -189,8 +193,6 @@ public class Login extends AppCompatActivity {
         //Check if the user Doctor try to log in
         final String doc_emailCheck = Objects.requireNonNull(emailLogUser.getText()).toString().trim();
 
-        databaseRefDoc = FirebaseDatabase.getInstance().getReference("Doctors");
-
         databaseRefDoc.orderByChild("docEmail_Address").equalTo(doc_emailCheck)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -213,8 +215,6 @@ public class Login extends AppCompatActivity {
 
         //Check if the user Patient try to log in
         final String pat_emailCheck = Objects.requireNonNull(emailLogUser.getText()).toString().trim();
-
-        databaseRefPat = FirebaseDatabase.getInstance().getReference("Patients");
 
         databaseRefPat.orderByChild("patEmail_Address").equalTo(pat_emailCheck)
                 .addListenerForSingleValueEvent(new ValueEventListener() {

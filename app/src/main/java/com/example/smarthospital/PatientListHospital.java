@@ -90,7 +90,7 @@ public class PatientListHospital extends AppCompatActivity {
     private void loadPatientsListHospital(){
 
         //Retrieve data from Patients database
-        databaseReference = FirebaseDatabase.getInstance().getReference("Patients");
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("Patients");
 
         eventListener = databaseReference.addValueEventListener(new ValueEventListener() {
             @SuppressLint({"SetTextI18n", "NotifyDataSetChanged"})

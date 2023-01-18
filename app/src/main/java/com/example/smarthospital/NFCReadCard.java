@@ -49,7 +49,7 @@ public class NFCReadCard extends AppCompatActivity {
 
     private String save_Code;
 
-    private Button btn_Save, btn_Clear;
+    private Button btn_Save, btn_Clear, btn_Check;
 
     private List<Tag> mTags;
 
@@ -65,8 +65,8 @@ public class NFCReadCard extends AppCompatActivity {
 
         progressDialog = new ProgressDialog(this);
 
-        databaseRefCheckPat = FirebaseDatabase.getInstance().getReference("Patients");
-        databaseRefNFCId = FirebaseDatabase.getInstance().getReference("Patients");
+        databaseRefCheckPat = FirebaseDatabase.getInstance().getReference().child("Patients");
+        databaseRefNFCId = FirebaseDatabase.getInstance().getReference().child("Patients");
 
         mTags = new ArrayList<>();
 
@@ -80,6 +80,7 @@ public class NFCReadCard extends AppCompatActivity {
 
         btn_Save = findViewById(R.id.btnSave);
         btn_Clear = findViewById(R.id.btnClear);
+        btn_Check = findViewById(R.id.btnCheck);
 
         tVSaveCode.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,7 +103,6 @@ public class NFCReadCard extends AppCompatActivity {
             }
         });
 
-        Button btn_Check = findViewById(R.id.btnCheck);
         btn_Check.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -126,59 +126,6 @@ public class NFCReadCard extends AppCompatActivity {
         pendingIntent = PendingIntent.getActivity(this, 0,
                 new Intent(this, getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
 
-    }
-
-    private void alertNothingToClear(){
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder
-                .setMessage("There is nothing to clear!!")
-                .setCancelable(false)
-                .setPositiveButton("Ok",
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        });
-
-        AlertDialog alertDialog = alertDialogBuilder.create();
-        alertDialog.show();
-    }
-
-    //For Button Save and TextView saveCode
-    private void alertNoNFCId(){
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder
-                .setMessage("Hold the card in the back of your device to get a Patient NFC Id, and then press the button SAVE!")
-                .setCancelable(false)
-                .setPositiveButton("Ok",
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        });
-
-        AlertDialog alertDialog = alertDialogBuilder.create();
-        alertDialog.show();
-    }
-
-    //for Button Chek
-    private void alertNoNFCFound(){
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder
-                .setMessage("No Patient NFC id found.\nHold the card in the back of your device.\nPress the button SAVE and then press Check Id")
-                .setCancelable(false)
-                .setPositiveButton("Ok",
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        });
-
-        AlertDialog alertDialog = alertDialogBuilder.create();
-        alertDialog.show();
     }
 
     @Override
@@ -421,14 +368,14 @@ public class NFCReadCard extends AppCompatActivity {
         progressDialog.setMessage("The Patient is identified!!");
         progressDialog.show();
 
-        databaseRefCheckPat.orderByChild("Patients").addListenerForSingleValueEvent(new ValueEventListener() {
+        DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
+        rootRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                if (snapshot.exists()){
+                if (snapshot.hasChild("Patients")) {
                     checkPatientNFCId();
-
                 }
+
                 else{
                     alertNoPatientRegisteredFound();
                 }
@@ -437,9 +384,31 @@ public class NFCReadCard extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(NFCReadCard.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+
             }
         });
+
+//        progressDialog.setMessage("The Patient is identified!!");
+//        progressDialog.show();
+//
+//        databaseRefCheckPat.orderByChild("Patients").addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//
+//                if (snapshot.exists()){
+//                    checkPatientNFCId();
+//                }
+//                else{
+//                    alertNoPatientRegisteredFound();
+//                }
+//                progressDialog.dismiss();
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//                Toast.makeText(NFCReadCard.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+//            }
+//        });
     }
 
     private void checkPatientNFCId() {
@@ -471,11 +440,12 @@ public class NFCReadCard extends AppCompatActivity {
                             alertNoPatientFond();
                         }
 
-                        //progressDialog.dismiss();
+                        progressDialog.dismiss();
                     }
+                    progressDialog.dismiss();
                 }
 
-                //progressDialog.dismiss();
+                progressDialog.dismiss();
             }
 
             @Override
@@ -483,6 +453,59 @@ public class NFCReadCard extends AppCompatActivity {
                 Toast.makeText(NFCReadCard.this, error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void alertNothingToClear(){
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder
+                .setMessage("There is nothing to clear!!")
+                .setCancelable(false)
+                .setPositiveButton("Ok",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+    }
+
+    //For Button Save and TextView saveCode
+    private void alertNoNFCId(){
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder
+                .setMessage("Hold the card in the back of your device to get a Patient NFC Id, and then press the button SAVE!")
+                .setCancelable(false)
+                .setPositiveButton("Ok",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+    }
+
+    //for Button Chek
+    private void alertNoNFCFound(){
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder
+                .setMessage("No Patient NFC id found.\nHold the card in the back of your device.\nPress the button SAVE and then press Check Id")
+                .setCancelable(false)
+                .setPositiveButton("Ok",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
     }
 
     private void alertNoPatientRegisteredFound(){
