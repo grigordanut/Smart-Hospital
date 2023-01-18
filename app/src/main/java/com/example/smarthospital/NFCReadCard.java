@@ -41,8 +41,11 @@ public class NFCReadCard extends AppCompatActivity {
     private NfcAdapter nfcAdapter;
     private PendingIntent pendingIntent;
 
-    private DatabaseReference databaseRefCheckPat;
-    private DatabaseReference databaseRefNFCId;
+    //Check if Patient table exists
+    private DatabaseReference dbRefCheckPatTable;
+
+    //Check if patient has NFC id recorded
+    private DatabaseReference dbRefNFCId;
     private ValueEventListener eventListener;
 
     private TextView tVShowNFC, tVSaveCode;
@@ -65,8 +68,8 @@ public class NFCReadCard extends AppCompatActivity {
 
         progressDialog = new ProgressDialog(this);
 
-        databaseRefCheckPat = FirebaseDatabase.getInstance().getReference().child("Patients");
-        databaseRefNFCId = FirebaseDatabase.getInstance().getReference().child("Patients");
+
+        dbRefNFCId = FirebaseDatabase.getInstance().getReference().child("Patients");
 
         mTags = new ArrayList<>();
 
@@ -112,7 +115,7 @@ public class NFCReadCard extends AppCompatActivity {
                 }
 
                 else {
-                    checkCodePatient();
+                    checkPatientDatabase();
                 }
             }
         });
@@ -363,19 +366,21 @@ public class NFCReadCard extends AppCompatActivity {
         tVShowNFC.setText(builder.toString());
     }
 
-    private void checkCodePatient(){
+    private void checkPatientDatabase(){
 
         progressDialog.setMessage("The Patient is identified!!");
         progressDialog.show();
 
-        DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
-        rootRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        dbRefCheckPatTable = FirebaseDatabase.getInstance().getReference().child("Patients");
+
+        dbRefCheckPatTable.addValueEventListener(new ValueEventListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.hasChild("Patients")) {
+                if (snapshot.exists()){
+
                     checkPatientNFCId();
                 }
-
                 else{
                     alertNoPatientRegisteredFound();
                 }
@@ -387,36 +392,11 @@ public class NFCReadCard extends AppCompatActivity {
 
             }
         });
-
-//        progressDialog.setMessage("The Patient is identified!!");
-//        progressDialog.show();
-//
-//        databaseRefCheckPat.orderByChild("Patients").addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//
-//                if (snapshot.exists()){
-//                    checkPatientNFCId();
-//                }
-//                else{
-//                    alertNoPatientRegisteredFound();
-//                }
-//                progressDialog.dismiss();
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//                Toast.makeText(NFCReadCard.this, error.getMessage(), Toast.LENGTH_SHORT).show();
-//            }
-//        });
     }
 
     private void checkPatientNFCId() {
 
-//        progressDialog.setMessage("The Patient is identified!!");
-//        progressDialog.show();
-
-        eventListener = databaseRefNFCId.addValueEventListener(new ValueEventListener() {
+        eventListener = dbRefNFCId.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot postSnapshot : snapshot.getChildren()){
@@ -439,13 +419,8 @@ public class NFCReadCard extends AppCompatActivity {
 
                             alertNoPatientFond();
                         }
-
-                        progressDialog.dismiss();
                     }
-                    progressDialog.dismiss();
                 }
-
-                progressDialog.dismiss();
             }
 
             @Override
