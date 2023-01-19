@@ -14,105 +14,39 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartHospital">
-        <activity
-            android:name=".NFCReadCard"
-            android:exported="false" />
-        <activity
-            android:name=".PatientNFC"
-            android:exported="false" />
-        <activity
-            android:name=".HospitalChangeEmail"
-            android:exported="false" />
-        <activity
-            android:name=".UpdateMedicalRecord"
-            android:exported="false" />
-        <activity
-            android:name=".PatientListShowMedicalRecord"
-            android:exported="false" />
-        <activity
-            android:name=".MedicalRecordList"
-            android:exported="false" />
-        <activity
-            android:name=".AddMedicalRecord"
-            android:exported="false" />
-        <activity
-            android:name=".PatientListAddMedicalRecord"
-            android:exported="false" />
-        <activity
-            android:name=".PatientListDoctor"
-            android:exported="false" />
-        <activity
-            android:name=".PatientChangeEmail"
-            android:exported="false" />
-        <activity
-            android:name=".PatientEditProfile"
-            android:exported="false" />
-        <activity
-            android:name=".DoctorChangeEmail"
-            android:exported="false" />
-        <activity
-            android:name=".MedicalRecordPatient"
-            android:exported="false" />
-        <activity
-            android:name=".PatientChangePassword"
-            android:exported="false" />
-        <activity
-            android:name=".PatientPage"
-            android:exported="false" />
-        <activity
-            android:name=".PatientRegistration"
-            android:exported="false" />
-        <activity
-            android:name=".DoctorChangePassword"
-            android:exported="false" />
-        <activity
-            android:name=".DoctorEditProfile"
-            android:exported="false" />
-        <activity
-            android:name=".PatientListHospital"
-            android:exported="false" />
-        <activity
-            android:name=".DoctorListHospital"
-            android:exported="false" />
-        <activity
-            android:name=".DoctorRegistration"
-            android:exported="false" />
-        <activity
-            android:name=".HospitalChangePassword"
-            android:exported="false" />
-        <activity
-            android:name=".HospitalEditProfile"
-            android:exported="false" />
-        <activity
-            android:name=".ResetPassword"
-            android:exported="false" />
-        <activity
-            android:name=".HospitalPage"
-            android:exported="false" />
-        <activity
-            android:name=".DoctorPage"
-            android:exported="false" />
-        <activity
-            android:name=".FingerPrintScan"
-            android:exported="false" />
-        <activity
-            android:name=".Login"
-            android:exported="false" />
-        <activity
-            android:name=".HospitalRegistration"
-            android:exported="false" />
-        <activity
-            android:name=".HospitalListAddDoctor"
-            android:exported="false" />
-        <activity
-            android:name=".CheckUniqueCode"
-            android:exported="false" />
-        <activity
-            android:name=".LoginBy"
-            android:exported="false" />
-        <activity
-            android:name=".ContactUsForm"
-            android:exported="false" />
+        <activity android:name=".NFCReadCard" />
+        <activity android:name=".PatientNFC" />
+        <activity android:name=".HospitalChangeEmail" />
+        <activity android:name=".UpdateMedicalRecord" />
+        <activity android:name=".PatientListShowMedicalRecord" />
+        <activity android:name=".MedicalRecordList" />
+        <activity android:name=".AddMedicalRecord" />
+        <activity android:name=".PatientListAddMedicalRecord" />
+        <activity android:name=".PatientListDoctor" />
+        <activity android:name=".PatientChangeEmail" />
+        <activity android:name=".PatientEditProfile" />
+        <activity android:name=".DoctorChangeEmail" />
+        <activity android:name=".MedicalRecordPatient" />
+        <activity android:name=".PatientChangePassword" />
+        <activity android:name=".PatientPage" />
+        <activity android:name=".PatientRegistration" />
+        <activity android:name=".DoctorChangePassword" />
+        <activity android:name=".DoctorEditProfile" />
+        <activity android:name=".PatientListHospital" />
+        <activity android:name=".DoctorListHospital" />
+        <activity android:name=".DoctorRegistration" />
+        <activity android:name=".HospitalChangePassword" />
+        <activity android:name=".HospitalEditProfile" />
+        <activity android:name=".ResetPassword" />
+        <activity android:name=".HospitalPage" />
+        <activity android:name=".DoctorPage" />
+        <activity android:name=".FingerPrintScan" />
+        <activity android:name=".Login" />
+        <activity android:name=".HospitalRegistration" />
+        <activity android:name=".HospitalListAddDoctor" />
+        <activity android:name=".CheckUniqueCode" />
+        <activity android:name=".LoginBy" />
+        <activity android:name=".ContactUsForm" />
         <activity
             android:name=".MainActivity"
             android:exported="true">

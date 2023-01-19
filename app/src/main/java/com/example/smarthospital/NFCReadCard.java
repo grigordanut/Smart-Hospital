@@ -41,10 +41,7 @@ public class NFCReadCard extends AppCompatActivity {
     private NfcAdapter nfcAdapter;
     private PendingIntent pendingIntent;
 
-    //Check if Patient table exists
-    private DatabaseReference dbRefCheckPatTable;
-
-    //Check if patient has NFC id recorded
+    //Check if the patient has NFC id recorded
     private DatabaseReference dbRefNFCId;
     private ValueEventListener eventListener;
 
@@ -67,9 +64,6 @@ public class NFCReadCard extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).setTitle("NFC Read Card");
 
         progressDialog = new ProgressDialog(this);
-
-
-        dbRefNFCId = FirebaseDatabase.getInstance().getReference().child("Patients");
 
         mTags = new ArrayList<>();
 
@@ -110,12 +104,10 @@ public class NFCReadCard extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 save_Code = tVSaveCode.getText().toString().trim();
-                if (save_Code.equals("No patient NFC Id") || save_Code.equals("Click SAVE to get the Patient Id")){
+                if (save_Code.equals("No patient NFC Id") || save_Code.equals("Click SAVE to get the Patient Id")) {
                     alertNoNFCFound();
-                }
-
-                else {
-                    checkPatientDatabase();
+                } else {
+                    checkPatientNFCId();
                 }
             }
         });
@@ -166,7 +158,7 @@ public class NFCReadCard extends AppCompatActivity {
     //Tag data is converted to string to display
     //return the data from this tag in String format
     @SuppressLint("SetTextI18n")
-    private String dumpTagData(Tag tag){
+    private String dumpTagData(Tag tag) {
         StringBuilder sb = new StringBuilder();
         byte[] id = tag.getId();
         sb.append("ID (hex): ").append(toHex(id)).append('\n');
@@ -190,11 +182,9 @@ public class NFCReadCard extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 save_Code = tVSaveCode.getText().toString().trim();
-                if (save_Code.equals("Click SAVE to get the Patient Id")){
+                if (save_Code.equals("Click SAVE to get the Patient Id")) {
                     alertNothingToClear();
-                }
-
-                else{
+                } else {
                     tVSaveCode.setText("Click SAVE to get the Patient Id");
                     btn_Save.setClickable(true);
                     Toast.makeText(NFCReadCard.this, "The Button SAVE is clickable", Toast.LENGTH_SHORT).show();
@@ -327,7 +317,7 @@ public class NFCReadCard extends AppCompatActivity {
             NdefMessage[] msgs;
             if (rawMsgs != null) {
                 msgs = new NdefMessage[rawMsgs.length];
-                for (int i = 0; i < rawMsgs.length; i++){
+                for (int i = 0; i < rawMsgs.length; i++) {
                     msgs[i] = (NdefMessage) rawMsgs[i];
                 }
             } else {
@@ -336,8 +326,8 @@ public class NFCReadCard extends AppCompatActivity {
                 Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
                 byte[] payload = dumpTagData(tag).getBytes();
                 NdefRecord record = new NdefRecord(NdefRecord.TNF_UNKNOWN, empty, id, payload);
-                NdefMessage msg = new NdefMessage(new NdefRecord[] { record });
-                msgs =  new NdefMessage[] {msg};
+                NdefMessage msg = new NdefMessage(new NdefRecord[]{record});
+                msgs = new NdefMessage[]{msg};
                 mTags.add(tag);
             }
             displayNfcMessages(msgs);
@@ -354,7 +344,7 @@ public class NFCReadCard extends AppCompatActivity {
 
         final int size = records.size();
 
-        for (int i=0; i <size; i++) {
+        for (int i = 0; i < size; i++) {
 
             ParsedNdefRecord record = records.get(i);
 
@@ -366,46 +356,23 @@ public class NFCReadCard extends AppCompatActivity {
         tVShowNFC.setText(builder.toString());
     }
 
-    private void checkPatientDatabase(){
+    private void checkPatientNFCId() {
 
         progressDialog.setMessage("The Patient is identified!!");
         progressDialog.show();
 
-        dbRefCheckPatTable = FirebaseDatabase.getInstance().getReference().child("Patients");
-
-        dbRefCheckPatTable.addValueEventListener(new ValueEventListener() {
-            @SuppressLint("SetTextI18n")
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()){
-
-                    checkPatientNFCId();
-                }
-                else{
-                    alertNoPatientRegisteredFound();
-                }
-                progressDialog.dismiss();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    }
-
-    private void checkPatientNFCId() {
+        dbRefNFCId = FirebaseDatabase.getInstance().getReference().child("Patients");
 
         eventListener = dbRefNFCId.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot postSnapshot : snapshot.getChildren()){
+                if (snapshot.exists()) {
+                    for (DataSnapshot postSnapshot : snapshot.getChildren()) {
 
-                    Patients pat_data = postSnapshot.getValue(Patients.class);
-                    String save_Code = tVSaveCode.getText().toString().trim();
-
-                    if (pat_data != null) {
-                        if (save_Code.equals(pat_data.getPatCard_Code())){
+                        Patients pat_data = postSnapshot.getValue(Patients.class);
+                        String save_Code = tVSaveCode.getText().toString().trim();
+                        assert pat_data != null;
+                        if (save_Code.equals(pat_data.getPatCard_Code())) {
                             pat_data.setPatient_Key(postSnapshot.getKey());
                             Intent intent = new Intent(NFCReadCard.this, PatientNFC.class);
                             intent.putExtra("FIRSTNAME", pat_data.getPatFirst_Name());
@@ -414,13 +381,17 @@ public class NFCReadCard extends AppCompatActivity {
                             intent.putExtra("HOSPNAME", pat_data.getPatHosp_Name());
                             startActivity(intent);
                         }
-
-                        else{
+                        else {
 
                             alertNoPatientFond();
                         }
+
+                        progressDialog.dismiss();
                     }
+                } else {
+                    alertNoPatientRegisteredFound();
                 }
+                progressDialog.dismiss();
             }
 
             @Override
@@ -430,7 +401,7 @@ public class NFCReadCard extends AppCompatActivity {
         });
     }
 
-    private void alertNothingToClear(){
+    private void alertNothingToClear() {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder
                 .setMessage("There is nothing to clear!!")
@@ -448,7 +419,7 @@ public class NFCReadCard extends AppCompatActivity {
     }
 
     //For Button Save and TextView saveCode
-    private void alertNoNFCId(){
+    private void alertNoNFCId() {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder
                 .setMessage("Hold the card in the back of your device to get a Patient NFC Id, and then press the button SAVE!")
@@ -466,7 +437,7 @@ public class NFCReadCard extends AppCompatActivity {
     }
 
     //for Button Chek
-    private void alertNoNFCFound(){
+    private void alertNoNFCFound() {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder
                 .setMessage("No Patient NFC id found.\nHold the card in the back of your device.\nPress the button SAVE and then press Check Id")
@@ -483,7 +454,7 @@ public class NFCReadCard extends AppCompatActivity {
         alertDialog.show();
     }
 
-    private void alertNoPatientRegisteredFound(){
+    private void alertNoPatientRegisteredFound() {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder
                 .setMessage("No Patients registered in the database were found.\nPlease register Patients and then check the NFC id!!")
