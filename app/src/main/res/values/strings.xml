@@ -129,7 +129,7 @@
     <string name="btn_loginByFingerPrint">Disabled</string>
 
     <!--    Activity Main-->
-    <string name="tv_mainPage">Welcome to Smart Hospitals</string>
+    <string name="tv_mainPage">Welcome to Smart Hospital</string>
     <string name="btn_nfcMainPage">NFC</string>
     <string name="btn_registerMainPage">Register</string>
     <string name="btn_loginMainPage">Log In</string>

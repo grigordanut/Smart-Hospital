@@ -382,15 +382,16 @@ public class NFCReadCard extends AppCompatActivity {
                             startActivity(intent);
                         }
                         else {
-
                             alertNoPatientFond();
                         }
 
                         progressDialog.dismiss();
                     }
-                } else {
+                }
+                else {
                     alertNoPatientRegisteredFound();
                 }
+
                 progressDialog.dismiss();
             }
 

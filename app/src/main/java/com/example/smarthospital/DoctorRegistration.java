@@ -9,8 +9,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Patterns;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -86,12 +88,7 @@ public class DoctorRegistration extends AppCompatActivity {
 
 
         Button btn_doctorReg = findViewById(R.id.btnDoctorReg);
-        btn_doctorReg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                registerDoctor();
-            }
-        });
+        btn_doctorReg.setOnClickListener(v -> registerDoctor());
     }
 
     private void registerDoctor() {
@@ -102,63 +99,81 @@ public class DoctorRegistration extends AppCompatActivity {
             progressDialog.show();
 
             //Create new Doctor user into database
-            firebaseAuth.createUserWithEmailAndPassword(doc_EmailReg, doc_PassReg).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
+            firebaseAuth.createUserWithEmailAndPassword(doc_EmailReg, doc_PassReg).addOnCompleteListener(task -> {
 
-                    if (task.isSuccessful()) {
+                if (task.isSuccessful()) {
 
-                        uploadDoctorData();
+                    uploadDoctorData();
 
-                    } else {
-                        try {
-                            throw Objects.requireNonNull(task.getException());
-                        } catch (Exception e) {
-                            Toast.makeText(DoctorRegistration.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    }
-
-                    progressDialog.dismiss();
                 }
+                else {
+                    try {
+                        throw Objects.requireNonNull(task.getException());
+                    } catch (Exception e) {
+
+                        LayoutInflater inflater = getLayoutInflater();
+                        @SuppressLint("InflateParams") View layout = inflater.inflate(R.layout.toast, null);
+                        TextView text = layout.findViewById(R.id.tvToast);
+                        ImageView imageView = layout.findViewById(R.id.imgToast);
+                        text.setText(e.getMessage());
+                        imageView.setImageResource(R.drawable.baseline_report_gmailerrorred_24);
+                        Toast toast = new Toast(getApplicationContext());
+                        toast.setDuration(Toast.LENGTH_LONG);
+                        toast.setView(layout);
+                        toast.show();
+                    }
+                }
+
+                progressDialog.dismiss();
             });
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private void uploadDoctorData() {
 
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
 
-        if (firebaseUser != null) {
+        assert firebaseUser != null;
+        String doc_Id = firebaseUser.getUid();
 
-            String doc_Id = firebaseUser.getUid();
-            Doctors doc_Data = new Doctors(doc_UniqueCode, doc_FirstName, doc_LastName, doc_Phone, doc_EmailReg, docHospital_Name, docHospital_Key);
+        Doctors doc_Data = new Doctors(doc_UniqueCode, doc_FirstName, doc_LastName, doc_Phone, doc_EmailReg, docHospital_Name, docHospital_Key);
 
-            databaseReference.child(doc_Id).setValue(doc_Data).addOnCompleteListener(DoctorRegistration.this, new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
+        databaseReference.child(doc_Id).setValue(doc_Data).addOnCompleteListener(DoctorRegistration.this, task -> {
 
-                    if (task.isSuccessful()) {
+            if (task.isSuccessful()) {
 
-                        firebaseUser.sendEmailVerification();
+                firebaseUser.sendEmailVerification();
 
-                        Toast.makeText(DoctorRegistration.this, "Doctor successfully registered.\nVerification Email has been sent!", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(DoctorRegistration.this, Login.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(intent);
-                        finish();
+                LayoutInflater inflater = getLayoutInflater();
+                @SuppressLint("InflateParams") View layout = inflater.inflate(R.layout.toast, null);
+                TextView text = layout.findViewById(R.id.tvToast);
+                ImageView imageView = layout.findViewById(R.id.imgToast);
+                text.setText("Registration successful. Verification email sent!!");
+                imageView.setImageResource(R.drawable.baseline_person_add_alt_1_24);
+                Toast toast = new Toast(getApplicationContext());
+                toast.setDuration(Toast.LENGTH_LONG);
+                toast.setView(layout);
+                toast.show();
 
-                    } else {
-                        try {
-                            throw Objects.requireNonNull(task.getException());
-                        } catch (Exception e) {
-                            Toast.makeText(DoctorRegistration.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    }
+                //Toast.makeText(DoctorRegistration.this, "Doctor successfully registered.\nVerification Email has been sent!", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(DoctorRegistration.this, Login.class);
+                //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                finish();
 
-                    progressDialog.dismiss();
+            }
+            else {
+                try {
+                    throw Objects.requireNonNull(task.getException());
                 }
-            });
-        }
+                catch (Exception e) {
+                    Toast.makeText(DoctorRegistration.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            //progressDialog.dismiss();
+        });
     }
 
     private Boolean validateDoctorData() {

@@ -89,14 +89,13 @@ public class HospitalChangeEmail extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                hospOld_Email =  hospOldEmail.getText().toString().trim();
+                hospOld_Email = hospOldEmail.getText().toString().trim();
                 hosp_Password = hospPassword.getText().toString().trim();
 
                 if (TextUtils.isEmpty(hosp_Password)) {
                     hospPassword.setError("Enter your password");
                     hospPassword.requestFocus();
-                }
-                else{
+                } else {
 
                     progressDialog.setMessage("The Hospital is authenticating!");
                     progressDialog.show();
@@ -107,7 +106,7 @@ public class HospitalChangeEmail extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
 
-                            if (task.isSuccessful()){
+                            if (task.isSuccessful()) {
 
                                 progressDialog.dismiss();
 
@@ -135,15 +134,13 @@ public class HospitalChangeEmail extends AppCompatActivity {
 
                                         hospNew_Email = hospNewEmail.getText().toString().trim();
 
-                                        if (TextUtils.isEmpty(hospNew_Email)){
+                                        if (TextUtils.isEmpty(hospNew_Email)) {
                                             hospNewEmail.setError("Enter your new Email Address");
                                             hospNewEmail.requestFocus();
-                                        }
-                                        else if (!Patterns.EMAIL_ADDRESS.matcher(hospNew_Email).matches()) {
+                                        } else if (!Patterns.EMAIL_ADDRESS.matcher(hospNew_Email).matches()) {
                                             hospNewEmail.setError("Enter a valid Email Address");
                                             hospNewEmail.requestFocus();
-                                        }
-                                        else{
+                                        } else {
 
                                             progressDialog.setMessage("The Hospital email is changing!");
                                             progressDialog.show();
@@ -151,15 +148,13 @@ public class HospitalChangeEmail extends AppCompatActivity {
                                             firebaseUser.updateEmail(hospNew_Email).addOnCompleteListener(new OnCompleteListener<Void>() {
                                                 @Override
                                                 public void onComplete(@NonNull Task<Void> task) {
-                                                    if (task.isSuccessful()){
+                                                    if (task.isSuccessful()) {
                                                         sendEmailVerification();
-                                                    }
-
-                                                    else{
-                                                        try{
+                                                    } else {
+                                                        try {
                                                             throw Objects.requireNonNull(task.getException());
                                                         } catch (Exception e) {
-                                                            Toast.makeText(HospitalChangeEmail.this,e.getMessage(),Toast.LENGTH_SHORT).show();
+                                                            Toast.makeText(HospitalChangeEmail.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                                                         }
                                                     }
                                                 }
@@ -167,12 +162,10 @@ public class HospitalChangeEmail extends AppCompatActivity {
                                         }
                                     }
                                 });
-                            }
-
-                            else{
+                            } else {
                                 try {
                                     throw Objects.requireNonNull(task.getException());
-                                } catch (FirebaseAuthInvalidCredentialsException e){
+                                } catch (FirebaseAuthInvalidCredentialsException e) {
                                     hospPassword.setError("Invalid Password");
                                     hospPassword.requestFocus();
                                     tVHospAuthEmail.setText("Your profile is not authenticated yet. Please authenticate your profile first and then change the email!!");
@@ -189,7 +182,7 @@ public class HospitalChangeEmail extends AppCompatActivity {
         });
     }
 
-    private void alertUserNotAuthEmail(){
+    private void alertUserNotAuthEmail() {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder
                 .setMessage("Your profile is not authenticated yet.\nPlease authenticate your profile first and then change the Email!!")
@@ -206,7 +199,7 @@ public class HospitalChangeEmail extends AppCompatActivity {
         alertDialog.show();
     }
 
-    private void alertPassChangeEmail(){
+    private void alertPassChangeEmail() {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder
                 .setMessage("Password cannot be changed after user authentication!")
@@ -252,12 +245,11 @@ public class HospitalChangeEmail extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
 
-                    final FirebaseUser user_Key = firebaseAuth.getCurrentUser();
+                    final FirebaseUser user_Id = firebaseAuth.getCurrentUser();
 
-                    if (user_Key != null) {
-                        if (user_Key.getUid().equals(postSnapshot.getKey())){
-                            postSnapshot.getRef().child("hosp_Email").setValue(hospNew_Email);
-                        }
+                    assert user_Id != null;
+                    if (user_Id.getUid().equals(postSnapshot.getKey())) {
+                        postSnapshot.getRef().child("hosp_Email").setValue(hospNew_Email);
                     }
                 }
 
@@ -282,7 +274,7 @@ public class HospitalChangeEmail extends AppCompatActivity {
         return true;
     }
 
-    private void hospChangeEmailGoBack(){
+    private void hospChangeEmailGoBack() {
         startActivity(new Intent(HospitalChangeEmail.this, HospitalPage.class));
         finish();
     }
